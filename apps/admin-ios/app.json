@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Spaz SsG Admin",
+    "slug": "spaz-ssg-admin",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#08090C"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.spazssg.admin",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Allow Spaz SsG Admin to use Face ID for secure biometric sign-in."
+      }
+    },
+    "android": {
+      "package": "com.spazssg.admin"
+    },
+    "plugins": [
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow Spaz SsG Admin to use Face ID."
+        }
+      ]
+    ]
+  }
+}
