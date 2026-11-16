@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaz SsG — Official Website | The Dreamers World</title>
+    <meta name="description" content="Official digital home of independent East Coast hip-hop artist Spaz SsG. Dark melodic trap, atmospheric R&B, cinematic soundscapes, and The Dreamers Club.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-cyan: #00DDF5;
+            --brand-orange: #FF791D;
+            --brand-silver: #D9DDE2;
+            --brand-black: #08090C;
+            --background: #08090C;
+            --surface: rgba(217, 221, 226, 0.035);
+            --surface-hover: rgba(217, 221, 226, 0.07);
+            --border: rgba(217, 221, 226, 0.12);
+            --text-primary: #D9DDE2;
+            --text-secondary: rgba(217, 221, 226, 0.68);
+            --accent-glow-cyan: rgba(0, 221, 245, 0.16);
+            --accent-glow-orange: rgba(255, 121, 29, 0.13);
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; background-color: var(--background); color: var(--text-primary); font-family: "Inter", sans-serif; }
+        body { background-color: var(--background); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; position: relative; }
+        .ambient-glow { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1; overflow: hidden; }
+        .glow-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; }
+        .glow-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--brand-cyan); }
+        .glow-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--brand-orange); }
+        h1, h2, h3, h4, h5, h6 { font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); }
+        a { color: inherit; text-decoration: none; transition: var(--transition); }
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(8, 9, 12, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .logo-area { display: flex; align-items: center; gap: 1rem; cursor: pointer; }
+        .logo-text { font-family: "Space Grotesk", sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: 0.05em; background: linear-gradient(135deg, var(--brand-silver) 40%, var(--brand-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); transition: var(--transition); cursor: pointer; }
+        .nav-links a:hover, .nav-links a.active { color: var(--brand-cyan); text-shadow: 0 0 12px var(--accent-glow-cyan); }
+        .nav-actions { display: flex; align-items: center; gap: 1rem; }
+        .btn-live-indicator { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255, 121, 29, 0.1); border: 1px solid rgba(255, 121, 29, 0.3); border-radius: 50px; font-size: 0.85rem; font-weight: 600; color: var(--brand-orange); animation: pulse-border 2s infinite; }
+        .pulse-dot { width: 8px; height: 8px; background-color: var(--brand-orange); border-radius: 50%; box-shadow: 0 0 8px var(--brand-orange); animation: pulse-dot 1.5s infinite; }
+        @keyframes pulse-dot { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 12px var(--brand-orange); } 100% { transform: scale(0.95); opacity: 0.8; } }
+        @keyframes pulse-border { 0% { border-color: rgba(255, 121, 29, 0.2); } 50% { border-color: rgba(255, 121, 29, 0.6); } 100% { border-color: rgba(255, 121, 29, 0.2); } }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        main { padding-top: 5rem; }
+        .view-section { display: none; min-height: calc(100vh - 5rem); padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .view-section.active { display: block; animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.85rem 2rem; border-radius: 4px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: var(--transition); border: none; }
+        .btn-primary { background: var(--brand-cyan); color: var(--brand-black); box-shadow: 0 0 20px rgba(0, 221, 245, 0.3); }
+        .btn-primary:hover { background: #33e4f7; box-shadow: 0 0 30px rgba(0, 221, 245, 0.5); transform: translateY(-2px); }
+        .btn-secondary { background: var(--surface); color: var(--text-primary); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--surface-hover); border-color: var(--brand-cyan); transform: translateY(-2px); }
+        .btn-orange { background: var(--brand-orange); color: var(--background); box-shadow: 0 0 20px rgba(255, 121, 29, 0.3); }
+        .btn-orange:hover { background: #ff8e42; box-shadow: 0 0 30px rgba(255, 121, 29, 0.5); transform: translateY(-2px); }
+        .hero-section { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 6rem 1rem; min-height: calc(90vh - 5rem); position: relative; }
+        .hero-tagline { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--brand-cyan); margin-bottom: 1.5rem; font-weight: 600; }
+        .hero-title { font-size: clamp(2.5rem, 6vw, 5.5rem); line-height: 1.05; margin-bottom: 1.5rem; max-width: 900px; }
+        .hero-title span { background: linear-gradient(135deg, var(--brand-cyan), var(--brand-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary); max-width: 650px; margin-bottom: 2.5rem; }
+        .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .section-header { margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+        .section-title { font-size: 2.2rem; letter-spacing: -0.03em; }
+        .section-subtitle { color: var(--text-secondary); font-size: 0.95rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: var(--transition); position: relative; overflow: hidden; }
+        .card:hover { border-color: rgba(0, 221, 245, 0.4); transform: translateY(-4px); background: var(--surface-hover); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .release-card { display: flex; flex-direction: column; gap: 1.5rem; }
+        .release-art { width: 100%; aspect-ratio: 1; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .release-info h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .release-meta { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; display: flex; gap: 1rem; }
+        .platform-links { display: flex; gap: 0.75rem; margin-top: auto; }
+        .platform-btn { flex: 1; padding: 0.6rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px; text-align: center; font-size: 0.85rem; font-weight: 500; color: var(--text-primary); transition: var(--transition); }
+        .platform-btn:hover { background: var(--brand-cyan); color: var(--brand-black); border-color: var(--brand-cyan); }
+        .spotify-embed-container { width: 100%; margin-top: 3rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+        .social-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; transition: var(--transition); }
+        .social-card:hover { border-color: var(--brand-cyan); background: var(--surface-hover); transform: translateY(-3px); }
+        .social-icon { width: 50px; height: 50px; border-radius: 10px; background: rgba(0, 221, 245, 0.1); color: var(--brand-cyan); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .live-banner { background: linear-gradient(135deg, rgba(255, 121, 29, 0.15), rgba(8, 9, 12, 0.9)); border: 1px solid rgba(255, 121, 29, 0.3); border-radius: 16px; padding: 3rem; margin-bottom: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+        .review-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        @media(max-width: 900px) { .about-content { grid-template-columns: 1fr; gap: 2rem; } }
+        .about-text p { color: var(--text-secondary); margin-bottom: 1.2rem; font-size: 1.05rem; }
+        .about-image { width: 100%; aspect-ratio: 4/5; background: linear-gradient(135deg, rgba(0,221,245,0.1), rgba(255,121,29,0.1)); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--brand-cyan); }
+        .directory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .directory-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
+        .directory-item:hover { border-color: var(--brand-cyan); background: var(--surface-hover); }
+        .admin-container { max-width: 1400px; margin: 0 auto; }
+        .admin-login-card { max-width: 450px; margin: 4rem auto; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); }
+        .form-input { width: 100%; padding: 0.85rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-size: 1rem; font-family: inherit; }
+        .form-input:focus { outline: none; border-color: var(--brand-cyan); box-shadow: 0 0 10px var(--accent-glow-cyan); }
+        .admin-dashboard-view { display: none; }
+        .admin-tabs { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; overflow-x: auto; }
+        .admin-tab-btn { background: none; border: none; color: var(--text-secondary); font-size: 1rem; font-weight: 600; cursor: pointer; padding: 0.5rem 1rem; border-radius: 6px; transition: var(--transition); white-space: nowrap; }
+        .admin-tab-btn.active, .admin-tab-btn:hover { background: var(--surface-hover); color: var(--brand-cyan); }
+        .admin-panel { display: none; }
+        .admin-panel.active { display: block; }
+        .admin-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .admin-table th, .admin-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        .admin-table th { background: rgba(255,255,255,0.03); font-weight: 600; color: var(--text-secondary); }
+        footer { border-top: 1px solid var(--border); padding: 3rem 2rem; margin-top: 5rem; background: rgba(8, 9, 12, 0.95); }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .footer-links { display: flex; gap: 1.5rem; list-style: none; font-size: 0.9rem; color: var(--text-secondary); }
+        .footer-links a:hover { color: var(--brand-cyan); }
+        @media(max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--background); flex-direction: column; padding: 1.5rem; border-bottom: 1px solid var(--border); gap: 1rem; }
+            .nav-links.open { display: flex; }
+            .mobile-menu-btn { display: block; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow">
+        <div class="glow-blob glow-1"></div>
+        <div class="glow-blob glow-2"></div>
+    </div>
+    <header>
+        <div class="nav-container">
+            <div class="logo-area" onclick="navigateTo('home')" style="cursor: pointer;">
+                <div class="logo-text">SPAZ SSG</div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a onclick="navigateTo('home')" id="nav-home" class="active">Home</a></li>
+                <li><a onclick="navigateTo('music')" id="nav-music">Music</a></li>
+                <li><a onclick="navigateTo('socials')" id="nav-socials">Socials</a></li>
+                <li><a onclick="navigateTo('live')" id="nav-live">LIVE</a></li>
+                <li><a onclick="navigateTo('about')" id="nav-about">About</a></li>
+                <li><a onclick="navigateTo('dreamers')" id="nav-dreamers">Dreamers Club</a></li>
+                <li><a onclick="navigateTo('links')" id="nav-links-page">Everything Spaz</a></li>
+                <li><a onclick="navigateTo('admin')" id="nav-admin" style="color: var(--brand-orange);"><i class="fa-solid fa-lock"></i> Admin</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#live" onclick="navigateTo('live')" class="btn-live-indicator">
+                    <div class="pulse-dot"></div>
+                    LIVE
+                </a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="view-home" class="view-section active">
+            <div class="hero-section">
+                <div class="hero-tagline">THE DREAMERS WORLD</div>
+                <h1 class="hero-title">WE GOING <span>LIVE‼️</span></h1>
+                <p class="hero-desc">Music, creativity, ambition, and the journey behind it all. Explore the dark melodic trap soundscapes and official world of Spaz SsG.</p>
+                <div class="hero-ctas">
+                    <button class="btn btn-primary" onclick="navigateTo('music')"><i class="fa-solid fa-play"></i> Listen Now</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('about')">Explore The World</button>
+                </div>
+            </div>
+            <div style="margin-top: 4rem;">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Featured Release</h2>
+                        <p class="section-subtitle">Latest official project & streaming destinations</p>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="card release-card">
+                        <div class="release-art">
+                            <i class="fa-solid fa-compact-disc" style="font-size: 5rem; color: var(--brand-cyan);"></i>
+                        </div>
+                        <div class="release-info">
+                            <h3>Still Dreaming</h3>
+                            <div class="release-meta">
+                                <span><i class="fa-solid fa-microphone"></i> Spaz SsG</span>
+                                <span><i class="fa-solid fa-calendar"></i> Single / EP</span>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                                Dark melodic trap and atmospheric rap driving through late-night reflection and ambition.
+                            </p>
+                            <div class="platform-links">
+                                <a href="https://open.spotify.com/artist/00IHJtvQJqIXnKhhvS3u92" target="_blank" class="platform-btn"><i class="fa-brands fa-spotify"></i> Spotify</a>
+                                <a href="https://music.apple.com/us/artist/spaz-ssg/1482065224" target="_blank" class="platform-btn"><i class="fa-brands fa-apple"></i> Apple Music</a>
+                                <a href="https://unitedmasters.com/a/spaz-ssg" target="_blank" class="platform-btn"><i class="fa-solid fa-globe"></i> UnitedMasters</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spotify-embed-container" style="margin-top: 0; display: flex; flex-direction: column; justify-content: center;">
+                        <h3 style="margin-bottom: 1rem;"><i class="fa-brands fa-spotify" style="color: #1DB954;"></i> Spotify Player</h3>
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/4v5EahyLrmNBETJh8rh70o?utm_source=generator&si=03d72484582c4a0a" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 6rem; background: linear-gradient(135deg, rgba(0,221,245,0.1), rgba(8,9,12,0.8)); border: 1px solid var(--border); border-radius: 16px; padding: 3rem; text-align: center;">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Join The Dreamers Club</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem auto;">
+                    More than a community. A place for artists, producers, songwriters, and supporters driven by purpose.
+                </p>
+                <a href="https://discord.gg/pk3r75EgD" target="_blank" class="btn btn-primary"><i class="fa-brands fa-discord"></i> Join Discord Community</a>
+            </div>
+        </section>
+        <section id="view-music" class="view-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Music Catalog</h2>
+                    <p class="section-subtitle">Singles, EPs, and albums by Spaz SsG</p>
+                </div>
+            </div>
+            <div class="grid-3" id="musicCatalogGrid"></div>
+            <div class="spotify-embed-container" style="margin-top: 4rem;">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-brands fa-spotify" style="color: #1DB954;"></i> Official Spotify Discography</h3>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/00IHJtvQJqIXnKhhvS3u92?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </section>
+        <section id="view-socials" class="view-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Social Ecosystem</h2>
+                    <p class="section-subtitle">Connect across all official platforms</p>
+                </div>
+            </div>
+            <div class="grid-2">
+                <a href="https://www.instagram.com/spvzssg" target="_blank" class="card social-card">
+                    <div class="social-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div>
+                        <h3>Instagram</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">@spvzssg — Reels, studio sessions, and daily updates.</p>
+                    </div>
+                </a>
+                <a href="https://www.tiktok.com/@spvzssg" target="_blank" class="card social-card">
+                    <div class="social-icon" style="background: rgba(255,121,29,0.1); color: var(--brand-orange);"><i class="fa-brands fa-tiktok"></i></div>
+                    <div>
+                        <h3>TikTok</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">@spvzssg — Short-form music clips and behind the scenes.</p>
+                    </div>
+                </a>
+                <a href="https://youtube.com/@spazssglive" target="_blank" class="card social-card">
+                    <div class="social-icon" style="background: rgba(255,0,0,0.1); color: #FF0000;"><i class="fa-brands fa-youtube"></i></div>
+                    <div>
+                        <h3>YouTube</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">@spazssglive — Music videos, live streams, and beat making.</p>
+                    </div>
+                </a>
+                <a href="https://www.twitch.tv/spazssg" target="_blank" class="card social-card">
+                    <div class="social-icon" style="background: rgba(145,70,255,0.1); color: #9146FF;"><i class="fa-brands fa-twitch"></i></div>
+                    <div>
+                        <h3>Twitch</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">spazssg — Live production, music reviews, and community hangouts.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <section id="view-live" class="view-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Live Broadcasts</h2>
+                    <p class="section-subtitle">Catch Spaz SsG streaming live across Twitch, TikTok, and YouTube</p>
+                </div>
+            </div>
+            <div class="live-banner">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="pulse-dot" style="width: 14px; height: 14px;"></div>
+                    <h3 style="font-size: 1.5rem;">WE GOING LIVE‼️ Calling all Dreamers</h3>
+                </div>
+                <p style="color: var(--text-secondary); max-width: 700px;">
+                    Tune into live beat making sessions, music review streams, and late-night studio sessions. Check our primary channels below to join when live.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://www.twitch.tv/spazssg" target="_blank" class="btn btn-orange"><i class="fa-brands fa-twitch"></i> Watch on Twitch</a>
+                    <a href="https://youtube.com/@spazssglive" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-youtube"></i> YouTube LIVE</a>
+                    <a href="https://www.tiktok.com/@spvzssg" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-tiktok"></i> TikTok LIVE</a>
+                </div>
+            </div>
+            <div class="review-box">
+                <h3 style="font-size: 1.8rem;"><i class="fa-solid fa-headphones"></i> Music Review & Submissions</h3>
+                <p style="color: var(--text-secondary); max-width: 600px;">
+                    Are you an artist or producer looking for honest feedback on your tracks? Submit your music for review during live streams. Free review options and skip-the-line priorities available.
+                </p>
+                <a href="https://www.nero.fan/spazssglive" target="_blank" class="btn btn-primary" style="margin-top: 1rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Submit Music for Review</a>
+            </div>
+        </section>
+        <section id="view-about" class="view-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">About Spaz SsG</h2>
+                    <p class="section-subtitle">The artist, the sound, and the vision</p>
+                </div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem;">Built on dreams. Driven by purpose.</h3>
+                    <p>Spaz SsG is an independent East Coast hip-hop recording artist crafting a signature sound built around dark melodic trap, atmospheric R&B, hypnotic production, and cinematic emotion.</p>
+                    <p>His music explores ambition, sacrifice, loyalty, family motivation, late-night solitude, and the determination to keep dreaming despite uncertainty.</p>
+                    <p>Balancing vulnerability and confidence, Spaz SsG connects deeply with listeners who understand what it takes to build something from the ground up.</p>
+                </div>
+                <div class="about-image">
+                    <i class="fa-solid fa-crown" style="font-size: 5rem; color: var(--brand-orange);"></i>
+                </div>
+            </div>
+        </section>
+        <section id="view-dreamers" class="view-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">The Dreamers Club</h2>
+                    <p class="section-subtitle">More than a community. A home for creators.</p>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-users" style="color: var(--brand-cyan);"></i> The Collective</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">The Dreamers Club brings together independent artists, producers, songwriters, and supporters from around the world.</p>
+                    <a href="https://discord.gg/pk3r75EgD" target="_blank" class="btn btn-primary"><i class="fa-brands fa-discord"></i> Join Discord Server</a>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, rgba(255,121,29,0.05), var(--surface));">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-bullseye" style="color: var(--brand-orange);"></i> Our Core Values</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong>Authenticity:</strong> Real music for real people.</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong>Ambition:</strong> Pushing past boundaries and working relentlessly.</p>
+                </div>
+            </div>
+        </section>
+        <section id="view-links" class="view-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Everything Spaz</h2>
+                    <p class="section-subtitle">Centralized directory of official links & services</p>
+                </div>
+            </div>
+            <div class="directory-grid">
+                <a href="https://open.spotify.com/artist/00IHJtvQJqIXnKhhvS3u92" target="_blank" class="directory-item"><span><i class="fa-brands fa-spotify" style="color: #1DB954; margin-right: 10px;"></i> Spotify Profile</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://music.apple.com/us/artist/spaz-ssg/1482065224" target="_blank" class="directory-item"><span><i class="fa-brands fa-apple" style="color: #fa233b; margin-right: 10px;"></i> Apple Music</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://unitedmasters.com/a/spaz-ssg" target="_blank" class="directory-item"><span><i class="fa-solid fa-globe" style="color: var(--brand-cyan); margin-right: 10px;"></i> UnitedMasters</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://www.instagram.com/spvzssg" target="_blank" class="directory-item"><span><i class="fa-brands fa-instagram" style="color: #E1306C; margin-right: 10px;"></i> Instagram</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://www.tiktok.com/@spvzssg" target="_blank" class="directory-item"><span><i class="fa-brands fa-tiktok" style="color: var(--text-primary); margin-right: 10px;"></i> TikTok</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://youtube.com/@spazssglive" target="_blank" class="directory-item"><span><i class="fa-brands fa-youtube" style="color: #FF0000; margin-right: 10px;"></i> YouTube Live</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://www.twitch.tv/spazssg" target="_blank" class="directory-item"><span><i class="fa-brands fa-twitch" style="color: #9146FF; margin-right: 10px;"></i> Twitch Channel</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://discord.gg/pk3r75EgD" target="_blank" class="directory-item"><span><i class="fa-brands fa-discord" style="color: #5865F2; margin-right: 10px;"></i> Discord Community</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="https://www.nero.fan/spazssglive" target="_blank" class="directory-item"><span><i class="fa-solid fa-headphones" style="color: var(--brand-orange); margin-right: 10px;"></i> Music Submissions</span><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+        <section id="view-admin" class="view-section">
+            <div class="admin-container">
+                <div id="adminLoginCard" class="admin-login-card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-lock" style="color: var(--brand-orange);"></i> Admin Portal</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9rem;">Sign in to manage website content, music releases, and livestream status.</p>
+                    <form onsubmit="handleAdminLogin(event)">
+                        <div class="form-group"><label class="form-label">Username</label><input type="text" id="adminUser" class="form-input" required value="admin"></div>
+                        <div class="form-group"><label class="form-label">Password</label><input type="password" id="adminPass" class="form-input" required value="spazssg2026"></div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                    </form>
+                </div>
+                <div id="adminDashboardView" class="admin-dashboard-view">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2>Content Management Dashboard</h2>
+                        <button class="btn btn-secondary" onclick="handleAdminLogout()">Sign Out</button>
+                    </div>
+                    <div class="admin-tabs">
+                        <button class="admin-tab-btn active" onclick="switchAdminTab('musicTab', this)">Music Releases</button>
+                    </div>
+                    <div id="musicTab" class="admin-panel active">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3>Manage Releases</h3>
+                            <button class="btn btn-primary" onclick="openAddReleaseModal()"><i class="fa-solid fa-plus"></i> Add Release</button>
+                        </div>
+                        <table class="admin-table">
+                            <thead><tr><th>Title</th><th>Type</th><th>Links</th><th>Actions</th></tr></thead>
+                            <tbody id="adminReleasesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div class="logo-text" style="font-size: 1.2rem; margin-bottom: 0.5rem;">SPAZ SSG</div>
+                <p style="color: var(--text-secondary); font-size: 0.85rem;">© 2026 Spaz SsG. All rights reserved. The Dreamers World.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a onclick="navigateTo('home')">Home</a></li>
+                <li><a onclick="navigateTo('music')">Music</a></li>
+                <li><a onclick="navigateTo('admin')">Admin</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script>
+        const defaultReleases = [
+            { id: 1, title: "Still Dreaming", type: "Single", date: "2026", desc: "Dark melodic trap and atmospheric rap.", spotify: "https://open.spotify.com/album/4v5EahyLrmNBETJh8rh70o", apple: "https://music.apple.com/us/artist/spaz-ssg/1482065224" },
+            { id: 2, title: "Late Night Drive", type: "Single", date: "2025", desc: "Hypnotic production and cinematic emotion.", spotify: "https://open.spotify.com/artist/00IHJtvQJqIXnKhhvS3u92", apple: "https://music.apple.com/us/artist/spaz-ssg/1482065224" },
+            { id: 3, title: "Dreamers World", type: "EP", date: "2025", desc: "The milestone project defining the movement.", spotify: "https://open.spotify.com/artist/00IHJtvQJqIXnKhhvS3u92", apple: "https://music.apple.com/us/artist/spaz-ssg/1482065224" }
+        ];
+        let releases = JSON.parse(localStorage.getItem('spaz_releases')) || defaultReleases;
+        function saveReleases() {
+            localStorage.setItem('spaz_releases', JSON.stringify(releases));
+            renderMusicCatalog();
+            renderAdminReleases();
+        }
+        function navigateTo(viewId) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            const targetSection = document.getElementById('view-' + viewId);
+            if (targetSection) { targetSection.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            const navLink = document.getElementById('nav-' + viewId);
+            if (navLink) navLink.classList.add('active');
+            document.getElementById('navLinks').classList.remove('open');
+        }
+        function toggleMobileMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+        function renderMusicCatalog() {
+            const grid = document.getElementById('musicCatalogGrid');
+            if (!grid) return;
+            grid.innerHTML = releases.map(rel => `
+                <div class="card release-card">
+                    <div class="release-art"><i class="fa-solid fa-compact-disc" style="font-size: 4rem; color: var(--brand-cyan);"></i></div>
+                    <div class="release-info">
+                        <h3>${rel.title}</h3>
+                        <div class="release-meta"><span><i class="fa-solid fa-tag"></i> ${rel.type}</span><span><i class="fa-solid fa-calendar"></i> ${rel.date}</span></div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">${rel.desc}</p>
+                        <div class="platform-links">
+                            <a href="${rel.spotify}" target="_blank" class="platform-btn"><i class="fa-brands fa-spotify"></i> Spotify</a>
+                            <a href="${rel.apple}" target="_blank" class="platform-btn"><i class="fa-brands fa-apple"></i> Apple</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        function renderAdminReleases() {
+            const tbody = document.getElementById('adminReleasesTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = releases.map(rel => `
+                <tr>
+                    <td><strong>${rel.title}</strong><br><small style="color: var(--text-secondary);">${rel.desc}</small></td>
+                    <td>${rel.type} (${rel.date})</td>
+                    <td><a href="${rel.spotify}" target="_blank" style="color: var(--brand-cyan);">Spotify Link</a></td>
+                    <td><button class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" onclick="deleteRelease(${rel.id})">Delete</button></td>
+                </tr>
+            `).join('');
+        }
+        function deleteRelease(id) {
+            if (confirm('Delete this release?')) { releases = releases.filter(r => r.id !== id); saveReleases(); }
+        }
+        function openAddReleaseModal() {
+            const title = prompt('Enter release title:');
+            if (!title) return;
+            const type = prompt('Enter release type (Single/EP/Album):', 'Single');
+            const desc = prompt('Enter short description:');
+            releases.unshift({ id: Date.now(), title, type: type || 'Single', date: '2026', desc: desc || 'Independent release.', spotify: 'https://open.spotify.com/artist/00IHJtvQJqIXnKhhvS3u92', apple: 'https://music.apple.com/us/artist/spaz-ssg/1482065224' });
+            saveReleases();
+        }
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            if (document.getElementById('adminUser').value === 'admin' && document.getElementById('adminPass').value === 'spazssg2026') {
+                localStorage.setItem('spaz_admin_logged', 'true');
+                showAdminDashboard(true);
+            } else { alert('Invalid credentials. Use admin / spazssg2026'); }
+        }
+        function handleAdminLogout() { localStorage.removeItem('spaz_admin_logged'); showAdminDashboard(false); }
+        function showAdminDashboard(isLoggedIn) {
+            document.getElementById('adminLoginCard').style.display = isLoggedIn ? 'none' : 'block';
+            document.getElementById('adminDashboardView').style.display = isLoggedIn ? 'block' : 'none';
+            if (isLoggedIn) renderAdminReleases();
+        }
+        function switchAdminTab(tabId, btn) {
+            document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMusicCatalog();
+            showAdminDashboard(localStorage.getItem('spaz_admin_logged') === 'true');
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                if (['home', 'music', 'socials', 'live', 'about', 'dreamers', 'links', 'admin'].includes(hash)) navigateTo(hash);
+            }
+        });
+    </script>
+</body>
+</html>
