@@ -206,12 +206,30 @@
             <div class="section-header">
                 <div>
                     <h2 class="section-title">Music Catalog</h2>
-                    <p class="section-subtitle">Singles, EPs, and albums by Spaz SsG</p>
+                    <p class="section-subtitle">Official streaming destinations & discography by Spaz SsG</p>
                 </div>
             </div>
-            <div class="grid-3" id="musicCatalogGrid"></div>
-            <div class="spotify-embed-container" style="margin-top: 4rem;">
-                <h3 style="margin-bottom: 1rem;"><i class="fa-brands fa-spotify" style="color: #1DB954;"></i> Official Spotify Discography</h3>
+            
+            <div class="grid-2" style="align-items: center; margin-bottom: 3rem;">
+                <div class="card" style="text-align: center; padding: 3rem 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;"><i class="fa-brands fa-apple" style="color: #fa233b;"></i> Apple Music</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Stream singles, EPs, and albums in high-fidelity audio.</p>
+                    <a href="https://music.apple.com/us/artist/spaz-ssg/1482065224?itscg=30200&itsct=music_box_badge&ls=1&app=music&mttnsubad=1482065224" target="_blank" style="display: inline-block;">
+                        <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/listen-on-apple-music/badge/en-us" alt="Listen on Apple Music" style="width: 282px; height: 82px; vertical-align: middle; object-fit: contain;" />
+                    </a>
+                </div>
+
+                <div class="card" style="text-align: center; padding: 3rem 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;"><i class="fa-brands fa-spotify" style="color: #1DB954;"></i> Spotify Artist</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Follow on Spotify for latest releases and monthly listeners.</p>
+                    <a href="https://open.spotify.com/artist/00IHJtvQJqIXnKhhvS3u92" target="_blank" class="btn btn-primary" style="background: #1DB954; color: #fff;">
+                        <i class="fa-brands fa-spotify"></i> Open Spotify Profile
+                    </a>
+                </div>
+            </div>
+
+            <div class="spotify-embed-container">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-brands fa-spotify" style="color: #1DB954;"></i> Official Spotify Player</h3>
                 <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/artist/00IHJtvQJqIXnKhhvS3u92?utm_source=generator&si=a79314e0d8e44a15" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </section>
